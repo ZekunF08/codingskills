@@ -1,7 +1,7 @@
 import { readCSV } from "./utils/csvHelper/csvHelper";
 
 const app = () => {
-    let catA = './input/catalogA.csv';
+    let catA: string = './input/catalogA.csv';
     readCSV(catA);
 }
 

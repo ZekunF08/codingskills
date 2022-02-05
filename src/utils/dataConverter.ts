@@ -2,7 +2,7 @@ import { CompanyPayload } from "../types/CompanyPayload";
 import { Catalog, CatalogWithSource } from "../types/Catalog";
 import { Product } from "../types/Product";
 import { SupplierProductBarcode } from "../types/SupplierProductBarcode";
-import { readCSV } from "./csvHelper";
+import { readCSV } from "./csvHelper/csvHelper";
 import { productReducer } from "./productsReducer";
 
 

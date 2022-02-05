@@ -2,9 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as csv from 'fast-csv';
 
-import { Catalog, CatalogWithSource } from "../types/Catalog";
-import { Supplier } from "../types/Supplier";
-import { SupplierProductBarcode } from "../types/SupplierProductBarcode";
+import { Catalog, CatalogWithSource } from "../../types/Catalog";
+import { Supplier } from "../../types/Supplier";
+import { SupplierProductBarcode } from "../../types/SupplierProductBarcode";
 
 export const readCSV = (filePath: string) => {
     const dataSet: Catalog[] | Supplier[] | SupplierProductBarcode[] = [];
@@ -34,10 +34,11 @@ export const writeCSV = (outPutFile: string, data: CatalogWithSource[]) => {
         console.error("No data");
         return;
     }
+    let outPutPath = `./output/${outPutFile}.csv`;
     let row = Object.keys(data[0]);
     // var outPutData = getTitle.concat(data);
     // let writeStream = fs.createWriteStream(outPutFile);
-    csv.writeToPath(outPutFile, [row, ...data],).
+    csv.writeToPath(outPutPath, [row, ...data],).
         on('error', err => console.error(err))
         .on('finish', () => console.log('Done writing.'));
 };

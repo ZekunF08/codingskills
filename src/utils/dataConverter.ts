@@ -1,4 +1,9 @@
+import { CompanyPayload } from "../types/CompanyPayload";
+import { Catalog } from "../types/Catalog";
+import { Product } from "../types/Product";
+import { SupplierProductBarcode } from "../types/SupplierProductBarcode";
 import { readCSV } from "./csvHelper";
+
 
 export const dataConverter = async() =>{
     let catAFile: string = './input/catalogA.csv';
@@ -7,16 +12,53 @@ export const dataConverter = async() =>{
     let barCodeBFile: string = './input/barcodesB.csv';
     let supplierAFile :string = './input/suppliersA.csv'
     let supplierBFile :string = './input/suppliersB.csv'
+
     var catA = await readCSV(catAFile);
-    console.log(`catA`, catA)
+    // console.log(`catA`, catA)
     var catB  =  await readCSV(catBFile);
-    console.log(`catB`, catB)
+    // console.log(`catB`, catB)
     var barCodeA = await readCSV(barCodeAFile);
-    console.log(`barCodeA`, barCodeA)
+    // console.log(`barCodeA`, barCodeA)
     var barCodeB = await readCSV(barCodeBFile);
-    console.log(`barCodeB`, barCodeB)
+    // console.log(`barCodeB`, barCodeB)
     var supA = await readCSV(supplierAFile);
-    console.log(`supplierAFile`, supA)
+    // console.log(`supplierAFile`, supA)
     var supB = await readCSV(supplierBFile);
-    console.log(`supplierBFile`, supB)
+    // console.log(`supplierBFile`, supB)
+    let companyPayloadA:CompanyPayload = {
+        company:'A',
+        catalog:await readCSV(catAFile),
+        supplier:await readCSV(supplierAFile),
+        supplierProductBarcode:await readCSV(barCodeAFile),
+    }
+        let companyPayloadB:CompanyPayload = {
+        company:'B',
+        catalog:await readCSV(catBFile),
+        supplier:await readCSV(supplierBFile),
+        supplierProductBarcode:await readCSV(barCodeBFile),
+    }
+    reduceToProduct(companyPayloadA);
+    reduceToProduct(companyPayloadB);
+}
+
+// reduce input into product 
+const reduceToProduct = (payload:CompanyPayload) =>
+{
+  
+    //TODO: handle type narrowDown earlier if have time
+    var catalogList = payload.catalog as Catalog[];
+    var productBarcodeList = payload.supplierProductBarcode as SupplierProductBarcode[];
+    // var supplierList = payload.supplierProductBarcode as SupplierProductBarcode[];
+    let result:Product[] = catalogList.map(cat=>{
+        var barCodes:SupplierProductBarcode[] = productBarcodeList.filter(x=>x.SKU===cat.SKU);
+        var supplierList = [...new Set(barCodes.map(x=>x.SupplierID))]
+        return{
+            company:payload.company,
+            catalog:cat,
+            barCodes:barCodes.map(x=>x.Barcode),
+            supplierId:supplierList
+        }
+    })
+
+    console.log('result',result);
 }

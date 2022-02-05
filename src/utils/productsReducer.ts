@@ -1,5 +1,6 @@
 import { Product } from "../types/Product";
-export const productReducer = (products: Product[]) => {
+import { CatalogWithSource } from '../types/Catalog';
+export const productReducer = (products: Product[]): CatalogWithSource[] => {
     let firstCompany = 'A';
     //console.log(`products`, products);
     //find duplicated barCodes
@@ -13,8 +14,9 @@ export const productReducer = (products: Product[]) => {
     });
     console.log(`newProducts`, newProducts);
 
-    var result = newProducts.map(prod => ({ SKU: prod.catalog.SKU, Description: prod.catalog.Description, source: prod.company }));
+    let result: CatalogWithSource[] = newProducts.map(prod => ({ SKU: prod.catalog.SKU, Description: prod.catalog.Description, source: prod.company }));
     console.log(`result`, result);
+    return result;
 };
 const isDuplicate = (array1: string[], array2: string[]): Boolean => {
     return array1.some(element => array2.indexOf(element) === -1);

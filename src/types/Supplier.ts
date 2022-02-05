@@ -1,4 +1,4 @@
 export interface Supplier {
-    ID: Number;
-    Name: string;
-  }
+  ID: Number;
+  Name: string;
+}

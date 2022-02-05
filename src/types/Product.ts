@@ -1,8 +1,8 @@
-import {Catalog} from './Catalog'
+import { Catalog } from './Catalog';
 
-export interface Product{
-    catalog:Catalog
-    company:string,
-    barCodes:string[],
-    supplierId:Number[],
+export interface Product {
+    catalog: Catalog;
+    company: string,
+    barCodes: string[],
+    supplierId: Number[],
 }

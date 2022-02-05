@@ -1,12 +1,12 @@
 import { CompanyPayload } from "../types/CompanyPayload";
-import { Catalog } from "../types/Catalog";
+import { Catalog, CatalogWithSource } from "../types/Catalog";
 import { Product } from "../types/Product";
 import { SupplierProductBarcode } from "../types/SupplierProductBarcode";
 import { readCSV } from "./csvHelper";
 import { productReducer } from "./productsReducer";
 
 
-export const dataConverter = async () => {
+export const dataConverter = async (): Promise<CatalogWithSource[]> => {
     let catAFile: string = './input/catalogA.csv';
     let catBFile: string = './input/catalogB.csv';
     let barCodeAFile: string = './input/barcodesA.csv';
@@ -42,7 +42,7 @@ export const dataConverter = async () => {
     var productsA = convertToProduct(companyPayloadA);
     var productsB = convertToProduct(companyPayloadB);
     // remove duplicated data here
-    productReducer(productsA.concat(productsB));
+    return productReducer(productsA.concat(productsB));
 };
 
 // reduce input into product 

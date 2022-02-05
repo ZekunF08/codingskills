@@ -1,7 +1,7 @@
-import { Product } from "../types/Product";
-import { CatalogWithSource } from '../types/Catalog';
-export const productReducer = (products: Product[]): CatalogWithSource[] => {
-    let firstCompany = 'A';
+import { Product } from "../../types/Product";
+import { CatalogWithSource } from '../../types/Catalog';
+export const productReducer = (products: Product[],): CatalogWithSource[] => {
+    const firstCompany = products[0].company;
     //console.log(`products`, products);
     //find duplicated barCodes
     var duplicatedCode = products.flatMap(x => x.barCodes).filter((v, i, a) => a.indexOf(v) !== i);
@@ -18,6 +18,9 @@ export const productReducer = (products: Product[]): CatalogWithSource[] => {
     console.log(`result`, result);
     return result;
 };
-const isDuplicate = (array1: string[], array2: string[]): Boolean => {
+export const isDuplicate = (array1: string[], array2: string[]): Boolean => {
+    if (array1.length < 1 || array2.length < 1) {
+        return false;
+    }
     return array1.some(element => array2.indexOf(element) === -1);
 };

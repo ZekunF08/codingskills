@@ -1,8 +1,8 @@
-import { readCSV } from "./utils/csvHelper/csvHelper";
 
-const app = () => {
-    let catA: string = './input/catalogA.csv';
-    readCSV(catA);
+import { dataConverter } from "./utils/dataConverter";
+
+const app = async() => {
+await dataConverter();
 }
 
 app();

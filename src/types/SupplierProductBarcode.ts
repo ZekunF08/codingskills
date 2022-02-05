@@ -1,5 +1,5 @@
 export interface SupplierProductBarcode {
-  SupplierID: Number;
+  SupplierID: number;
   SKU: string;
   Barcode: string;
 }

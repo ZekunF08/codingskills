@@ -4,5 +4,5 @@ export interface Product {
     catalog: Catalog;
     company: string,
     barCodes: string[],
-    supplierId: Number[],
+    supplierId: number[],
 }

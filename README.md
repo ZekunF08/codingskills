@@ -22,7 +22,7 @@ Here are the assumptions made:
    
     Run `npm install`
     #### via yarn: 
-     Run `yarn add`
+     Run `yarn install`
 
 ### Usage:
  #### via npm:

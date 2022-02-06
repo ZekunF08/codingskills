@@ -10,7 +10,7 @@ export const productReducer = (products: Product[],): CatalogWithSource[] => {
         if (x.company === firstCompany) {
             return true;
         }
-        return isDuplicate(x.barCodes, duplicatedCode);
+        return !isDuplicate(x.barCodes, duplicatedCode);
     });
     console.log(`newProducts`, newProducts);
 
@@ -22,5 +22,5 @@ export const isDuplicate = (array1: string[], array2: string[]): Boolean => {
     if (array1.length < 1 || array2.length < 1) {
         return false;
     }
-    return array1.some(element => array2.indexOf(element) === -1);
+    return array1.some(element => array2.indexOf(element) !== -1);
 };

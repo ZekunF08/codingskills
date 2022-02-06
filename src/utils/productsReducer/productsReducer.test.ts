@@ -18,7 +18,7 @@ describe('test isDuplicate function', () => {
     });
 
     it('should work for duplicate', () => {
-        var result = isDuplicate(['1231', '3123'], ['1231']);
+        var result = isDuplicate(['a', 'b'], ['a', 'c', 'd']);
         console.log(`result`, result);
         expect(result).toEqual(true);
     });

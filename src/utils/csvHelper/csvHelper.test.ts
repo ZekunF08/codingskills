@@ -13,4 +13,27 @@ describe('test Read CSV ', () => {
     it("should throw error if not csv file", async () => {
         return await expect(readCSV('./test/empty.txt')).rejects.toMatch(strings.error_file_type);
     });
+
+    it("should read correct csv file", async () => {
+        const expected = [{ "ID": "00001", "Name": "Twitterbridge" }, { "ID": "00002", "Name": "Thoughtsphere" }, { "ID": "00003", "Name": "Photobug" }, { "ID": "00004", "Name": "Jatri" }, { "ID": "00005", "Name": "Trunyx" }];
+        return await expect(readCSV('./test/suppliersA.csv')).resolves.toEqual(expected);
+    });
+
+    it("should read correct csv file with extra ", async () => {
+        const expected = [{ ID: '00001', Name: 'Twitterbridge', Phone: '012312' },
+        { ID: '00002', Name: 'Thoughtsphere', Phone: '012312' },
+        { ID: '00003', Name: 'Photobug', Phone: '012312' },
+        { ID: '00004', Name: 'Jatri', Phone: '012312' },
+        { ID: '00005', Name: 'Trunyx', Phone: '012312' }];
+        return await expect(readCSV('./test/suppliersAextra.csv')).resolves.toEqual(expected);
+    });
+
+    it("should read correct csv file if missing", async () => {
+        const expected = [{ ID: '00001', Name: '', Phone: '012312' },
+        { ID: '00002', Name: 'Thoughtsphere', Phone: '012312' },
+        { ID: '00003', Name: '', Phone: '012312' },
+        { ID: '', Name: 'Jatri', Phone: '012312' },
+        { ID: '00005', Name: '', Phone: '' }];
+        return await expect(readCSV('./test/suppliersAmissing.csv')).resolves.toEqual(expected);
+    });
 });

@@ -44,24 +44,24 @@ export const readCSV = (filePath: string) => {
 
 export const writeCSV = (outPutFile: string, data: CatalogWithSource[]) => {
     // let row = { SKU: 'ad', Description: 'ad', source: 'hahha' };
-    if (data.length < 1) {
-        console.error("No data");
-        return;
-    }
+    console.log(`data`, data);
     let outPutPath = `./output/${outPutFile}.csv`;
-    let row = Object.keys(data[0]);
+
     // var outPutData = getTitle.concat(data);
     // let writeStream = fs.createWriteStream(outPutFile);
     var result = new Promise((resolve, reject) => {
+        if (data.length < 1) {
+            reject(strings.error_no_result);
+            return;
+        }
+        let row = Object.keys(data[0]);
         csv.writeToPath(outPutPath, [row, ...data],).
             on('error', err => {
-                console.error(err);
                 reject(err);
                 return;
             })
             .on('finish', () => {
-                console.log('Done writing.');
-                resolve('Done writing.');
+                resolve(strings.success_done_writing);
             });
     });
     return result;

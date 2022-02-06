@@ -35,5 +35,28 @@ describe('test Read CSV ', () => {
         { ID: '', Name: 'Jatri', Phone: '012312' },
         { ID: '00005', Name: '', Phone: '' }];
         return await expect(readCSV('./test/suppliersAmissing.csv')).resolves.toEqual(expected);
+
+    });
+});
+
+describe('test write CSV', () => {
+    it("should raise error if no result", async () => {
+        return await expect(writeCSV('test_no_result', [])).rejects.toMatch(strings.error_no_result);
+    });
+    it("should raise success if write", async () => {
+        const test = [
+            {
+                SKU: '647-vyk-317',
+                Description: 'Walkers Special Old Whiskey',
+                source: 'A'
+            },
+            { SKU: '280-oad-768', Description: 'Bread - Raisin', source: 'A' },
+            { SKU: '165-rcy-650', Description: 'Tea - Decaf 1 Cup', source: 'A' },
+            {
+                SKU: '999-epd-782',
+                Description: 'Carbonated Water - Lemon Lime',
+                source: 'B'
+            }];
+        return await expect(writeCSV('test_result_success', test)).resolves.toMatch(strings.success_done_writing);
     });
 });

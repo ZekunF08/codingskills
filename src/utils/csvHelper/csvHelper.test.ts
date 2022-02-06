@@ -9,4 +9,8 @@ describe('test Read CSV ', () => {
     it("should throw error if CSV is empty", async () => {
         return await expect(readCSV('./test/empty.csv')).rejects.toMatch(strings.error_file_empty);
     });
+
+    it("should throw error if not csv file", async () => {
+        return await expect(readCSV('./test/empty.txt')).rejects.toMatch(strings.error_file_type);
+    });
 });

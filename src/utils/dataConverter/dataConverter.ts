@@ -1,25 +1,31 @@
 import { CompanyPayload } from "../../types/CompanyPayload";
-import { Catalog, CatalogWithSource } from "../../types/Catalog";
+import { Catalog } from "../../types/Catalog";
 import { Product } from "../../types/Product";
 import { SupplierProductBarcode } from "../../types/SupplierProductBarcode";
 import { Supplier } from "../../types/Supplier";
 import { readCSV } from "../csvHelper/csvHelper";
-import { productReducer } from "../productsReducer/productsReducer";
-
 
 export const dataConverter = async (catalogPath: string, barcodePath: string, supplierPath: string, source: string): Promise<CompanyPayload> => {
+    var supplier: Supplier[] = await readCSV(supplierPath) as Supplier[];
+    supplier.forEach(sup => {
+        sup.ID = Number(sup.ID);
+    });
+    var supplierProductBarcode: SupplierProductBarcode[] = await readCSV(barcodePath) as SupplierProductBarcode[];
+    supplierProductBarcode.forEach(code => {
+        code.SupplierID = Number(code.SupplierID);
+    });
     let companyPayload: CompanyPayload = {
         company: source,
         catalog: await readCSV(catalogPath),
-        supplier: await readCSV(supplierPath),
-        supplierProductBarcode: await readCSV(barcodePath),
+        supplier: supplier,
+        supplierProductBarcode: supplierProductBarcode,
     };
     return companyPayload;
 };
 
 // reduce input into product 
 export const convertToProduct = (payload: CompanyPayload): Product[] => {
-
+    // console.log(`payload`, payload);
     //TODO: handle type narrowDown earlier if have time
     var catalogList = payload.catalog as Catalog[];
     var productBarcodeList = payload.supplierProductBarcode as SupplierProductBarcode[];
@@ -35,6 +41,5 @@ export const convertToProduct = (payload: CompanyPayload): Product[] => {
         };
     });
 
-    //console.log('result',result);
     return result;
 };

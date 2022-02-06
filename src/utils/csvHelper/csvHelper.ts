@@ -15,6 +15,10 @@ export const readCSV = (filePath: string) => {
             reject(strings.error_file_not_exist);
             return;
         }
+        if (filePath.split('.').pop() !== 'csv') {
+            reject(strings.error_file_type);
+            return;
+        }
         fs.createReadStream(filePath)
             .pipe(csv.parse({ headers: true }))
             .on('error', error => {
@@ -48,7 +52,17 @@ export const writeCSV = (outPutFile: string, data: CatalogWithSource[]) => {
     let row = Object.keys(data[0]);
     // var outPutData = getTitle.concat(data);
     // let writeStream = fs.createWriteStream(outPutFile);
-    csv.writeToPath(outPutPath, [row, ...data],).
-        on('error', err => console.error(err))
-        .on('finish', () => console.log('Done writing.'));
+    var result = new Promise((resolve, reject) => {
+        csv.writeToPath(outPutPath, [row, ...data],).
+            on('error', err => {
+                console.error(err);
+                reject(err);
+                return;
+            })
+            .on('finish', () => {
+                console.log('Done writing.');
+                resolve('Done writing.');
+            });
+    });
+    return result;
 };

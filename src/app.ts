@@ -17,7 +17,7 @@ const app = async () => {
     var result = productReducer([...productsA, ...productsB]);
 
     //output result as per requirement
-    await writeCSV('result', result);
+    await writeCSV('merged_catalog', result);
 };
 
 app();

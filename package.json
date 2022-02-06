@@ -2,7 +2,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "start": "node ./bin/app.js",
+    "start": "ts-node ./src/app.ts",
     "dev": "ts-node ./src/app.ts"
   },
   "dependencies": {

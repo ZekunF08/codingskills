@@ -1,12 +1,44 @@
 # Coding Skills Challenge
+###
+Author: Zekun Fang
 
-### The below describes a problem statement, make sure to read all the instructions in this readme before you start.
-
+Date: 06/02/2022
 ### Business Requirement:
 
 - Company A have acquired Company B, A and B sell some common products, sourced from suppliers (Sometimes the same supplier, sometimes a different one). 
 - The business wants to consolidate the product catalog into one superset (merged catalog). 
 
+### Assumptions:
+Here are the assumptions made:
+1. There is only 2 company data merged at one time.
+2. The data is well structured as per sample data.
+3. There is no duplicated product within the same company.
+
+### Install:
+1.  Please make sure you have Node installed
+2.  Please make sure you have Yarn or Npm installed
+3.  #### via npm:
+   
+    Run `npm install`
+    #### via yarn: 
+     Run `yarn add`
+
+### Usage:
+ #### via npm:
+     Run `npm start`
+#### via yarn:
+     Run `yarn start`
+
+After run the above code you should see a csv document named as [merged.csv](output/merged_catalog.csv). This file in the repo is created by using the sample data below.
+
+For any questions feel free to reach out: zekun.fang08@gmail.com
+###  Unit Test:  
+#### via npm:
+    Run `npm test`
+#### via yarn:
+    Run `yarn test`
+
+### The below describes a problem statement, make sure to read all the instructions in this readme before you start.
 ### There are possibilities like:
 
 - Company A and B could have conflicting product codes (SKUs).

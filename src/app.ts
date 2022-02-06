@@ -3,6 +3,7 @@ import filePath from "./Constants/filePath";
 import { writeCSV } from "./utils/csvHelper/csvHelper";
 import { dataConverter, convertToProduct } from "./utils/dataConverter/dataConverter";
 import { productReducer } from "./utils/productsReducer/productsReducer";
+import { sortCatalog } from "./utils/sortCatalog/sortCatalog";
 
 const app = async () => {
     // get all company info by reading CSV files
@@ -14,8 +15,9 @@ const app = async () => {
     var productsB = convertToProduct(companyBInfo);
 
     //remove duplicated products in two companies
-    var result = productReducer([...productsA, ...productsB]);
+    var mergedProduct = productReducer([...productsA, ...productsB]);
 
+    var result = sortCatalog(mergedProduct);
     //output result as per requirement
     await writeCSV('merged_catalog', result);
 };

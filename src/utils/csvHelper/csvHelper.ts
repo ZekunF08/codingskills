@@ -44,7 +44,6 @@ export const readCSV = (filePath: string) => {
 
 export const writeCSV = (outPutFile: string, data: CatalogWithSource[]) => {
     // let row = { SKU: 'ad', Description: 'ad', source: 'hahha' };
-    console.log(`data`, data);
     let outPutPath = `./output/${outPutFile}.csv`;
 
     // var outPutData = getTitle.concat(data);

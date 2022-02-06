@@ -10,9 +10,10 @@ Date: 06/02/2022
 
 ### Assumptions:
 Here are the assumptions made:
-1. There is only 2 company data merged at one time.
+1. There are only 2 companies' data merged at one time.
 2. The data is well structured as per sample data.
-3. There is no duplicated product within the same company.
+3. There is no duplicated product within the same company(e.g. different products share the same barcode).
+4. The merged catalog should be sort by based on catalog A's order but if there is any product that has the same name in company B,this product would come before the product in company A.Otherwise it display after end of the catalog of company A  
 
 ### Install:
 1.  Please make sure you have Node installed
@@ -57,14 +58,6 @@ So, you have following entities to play with:
 
 <img src="./entity_diagram.png" width="800px" height="auto">
 
-
-
-You need to produce code in your preferred language which can demonstrate following:
-
-### Initial load
-- Mega merge: All products from both companies should get merge into a common catalog
- 
-
 ### Sample Data 
 Please refer input folder for following CSVs:
 1. [catalogA.csv](input/catalogA.csv) - Products for Company A
@@ -74,12 +67,3 @@ Please refer input folder for following CSVs:
 1. [barcodesA.csv](input/barcodesA.csv) - Product barcodes provided by supplier for company A
 1. [barcodesB.csv](input/barcodesB.csv) - Product barcodes provided by supplier for company B
 1. [result_output.csv](output/result_output.csv) - The correct results based on the above sample data
-
-
-### Deliverables.
-- Application should be able to accept above data as csv files from input folder and must produce a merged catalog as a csv file in output folder.
-- Proving your code works via unit testing is highly encouraged.
-- Spend as little or as much time as you like ⌚
-- The code you produce can be in any language ⭐
-- The output of the efforts ❗ must be committed back into a Public Repo in Github and the URL shared back for review. 
-- Document instructions on how to install and run your solution in the README.

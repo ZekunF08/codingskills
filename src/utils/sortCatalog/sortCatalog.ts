@@ -1,14 +1,24 @@
 import { CatalogWithSource } from '../../types/Catalog';
 
 export const sortCatalog = (result: CatalogWithSource[]): CatalogWithSource[] => {
-    result.sort((a, b) => {
-        var compare: number = b.Description.localeCompare(a.Description);
-        // compare = 0 means description is same
-        if (compare !== 0) {
-            return compare;
+    var duplicatedName = result.filter((v, i, a) => a.findIndex(x => x.Description === v.Description) !== i);
+    var newResult = result.filter(r => {
+        if (r.source === 'A') {
+            return true;
         }
-        return b.source.localeCompare(a.source);
+        return !duplicatedName.some(x => x.Description === r.Description);
     });
-    console.log(`result`, result);
-    return result;
+    duplicatedName.forEach(dup => {
+        var indexA = newResult.findIndex(r => r.Description === dup.Description);
+        newResult = insert(newResult, indexA, dup);
+    });
+    return newResult;
 };
+const insert = (arr: CatalogWithSource[], index: number, newItem: CatalogWithSource) => [
+    // part of the array before the specified index
+    ...arr.slice(0, index),
+    // inserted item
+    newItem,
+    // part of the array after the specified index
+    ...arr.slice(index)
+];

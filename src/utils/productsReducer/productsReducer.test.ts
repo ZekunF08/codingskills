@@ -1,7 +1,6 @@
-import { isDuplicate, productReducer } from "./productsReducer";
+import { isDuplicate, productReducer } from './productsReducer';
 describe('test productReducer', () => {
     it('should remove duplicated product based on barcode with actual data', () => {
-
         const testProductsA = [
             {
                 company: 'A',
@@ -214,7 +213,6 @@ describe('test productReducer', () => {
         expect(result).toEqual(expected);
     });
     it('should not remove product if no barcode', () => {
-
         const testProductsB = [
             {
                 company: 'A',
@@ -248,7 +246,7 @@ describe('test productReducer', () => {
                 },
                 barCodes: [],
                 supplierId: [1]
-            },
+            }
         ];
         const expected = [{
             SKU: '647-vyk-317',
@@ -266,14 +264,13 @@ describe('test productReducer', () => {
             SKU: '999-vyk-317',
             Description: 'Walkers Special Old Whiskey test',
             source: 'B'
-        },
+        }
         ];
         const result = productReducer(testProductsB);
         expect(result).toEqual(expected);
     });
 
     it('should not remove product if have same SKU and description but different barcode', () => {
-
         const testProductsB = [
             {
                 company: 'A',
@@ -304,7 +301,7 @@ describe('test productReducer', () => {
                     'i0471865670982',
                     'b4381274928349'],
                 supplierId: [2]
-            },
+            }
         ];
         const expected = [{
             SKU: '647-vyk-317',
@@ -315,14 +312,13 @@ describe('test productReducer', () => {
             SKU: '647-vyk-317',
             Description: 'Walkers Special Old Whiskey',
             source: 'B'
-        },
+        }
         ];
         const result = productReducer(testProductsB);
         expect(result).toEqual(expected);
     });
 
     it('should remove product if have same barcode', () => {
-
         const testProductsB = [
             {
                 company: 'A',
@@ -354,13 +350,13 @@ describe('test productReducer', () => {
                     'b4381274928349',
                     'z2783613083817'],
                 supplierId: [2]
-            },
+            }
         ];
         const expected = [{
             SKU: '647-vyk-317',
             Description: 'Walkers Special Old Whiskey',
             source: 'A'
-        },
+        }
         ];
         const result = productReducer(testProductsB);
         expect(result).toEqual(expected);
@@ -369,27 +365,27 @@ describe('test productReducer', () => {
 
 describe('test isDuplicate function', () => {
     it('should return false for two empty array', () => {
-        var result = isDuplicate([], []);
+        const result = isDuplicate([], []);
         expect(result).toEqual(false);
     });
 
     it('should return false for one empty array', () => {
-        var result = isDuplicate(['1231', 'abcd'], []);
+        const result = isDuplicate(['1231', 'abcd'], []);
         expect(result).toEqual(false);
     });
 
     it('should return true for duplicate', () => {
-        var result = isDuplicate(['a', 'b'], ['a', 'c', 'd']);
+        const result = isDuplicate(['a', 'b'], ['a', 'c', 'd']);
         expect(result).toEqual(true);
     });
 
     it('should return false for no duplicate', () => {
-        var result = isDuplicate(['abcd', 'asd'], ['efgh', 'jkl']);
+        const result = isDuplicate(['abcd', 'asd'], ['efgh', 'jkl']);
         expect(result).toEqual(false);
     });
 
     it('should return false for self duplicate', () => {
-        var result = isDuplicate(['abcd', 'asd', 'asd', 'asd'], ['efgh', 'jkl', 'jkl', 'jkl']);
+        const result = isDuplicate(['abcd', 'asd', 'asd', 'asd'], ['efgh', 'jkl', 'jkl', 'jkl']);
         expect(result).toEqual(false);
     });
 });

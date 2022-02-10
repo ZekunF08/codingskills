@@ -1,11 +1,11 @@
-import filePath from "../../Constants/filePath";
-import { CompanyPayload } from "../../types/CompanyPayload";
-import { Product } from "../../types/Product";
-import { convertToProduct, dataConverter } from "./dataConverter";
+import filePath from '../../Constants/filePath';
+import { CompanyPayload } from '../../types/CompanyPayload';
+import { Product } from '../../types/Product';
+import { convertToProduct, dataConverter } from './dataConverter';
 
 describe('test data converter', () => {
     it('should return Company A payload if correct input are given', async () => {
-        var companyAInfo = await dataConverter(filePath.cat_A_file, filePath.barcode_A_file, filePath.supplier_A_file, 'A');
+        const companyAInfo = await dataConverter(filePath.cat_A_file, filePath.barcode_A_file, filePath.supplier_A_file, 'A');
         // var companyBInfo = await dataConverter(filePath.cat_B_file, filePath.barcode_B_file, filePath.supplier_B_file, 'B');
         const expected = {
             company: 'A',
@@ -85,7 +85,7 @@ describe('test data converter', () => {
     });
     it('should return Company B payload if correct input are given', async () => {
         // var companyAInfo = await dataConverter(filePath.cat, filePath.barcode_A_file, filePath.supplier_A_file, 'A');
-        var companyBInfo: CompanyPayload = await dataConverter(filePath.cat_B_file, filePath.barcode_B_file, filePath.supplier_B_file, 'B');
+        const companyBInfo: CompanyPayload = await dataConverter(filePath.cat_B_file, filePath.barcode_B_file, filePath.supplier_B_file, 'B');
         const expected = {
             company: 'B',
             catalog: [
@@ -168,10 +168,10 @@ describe('test data convertToProduct function', () => {
         const payload: CompanyPayload = {
             company: 'A',
             catalog: [
-                { SKU: '647-vyk-317', Description: 'Walkers Special Old Whiskey' },
+                { SKU: '647-vyk-317', Description: 'Walkers Special Old Whiskey' }
             ],
             supplier: [
-                { ID: 1, Name: 'Twitterbridge' },
+                { ID: 1, Name: 'Twitterbridge' }
             ],
             supplierProductBarcode: [
                 {
@@ -198,7 +198,7 @@ describe('test data convertToProduct function', () => {
                     SupplierID: 5,
                     SKU: '650-epd-782',
                     Barcode: 'k3213966445562'
-                },
+                }
             ]
         };
         const product: Product[] = [
@@ -209,8 +209,7 @@ describe('test data convertToProduct function', () => {
                 supplierId: [1]
             }
         ];
-        var result = convertToProduct(payload);
+        const result = convertToProduct(payload);
         expect(result).toEqual(product);
     });
-
 });

@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    "jest/globals": true
   },
   extends: [
     'plugin:react/recommended',
@@ -16,6 +17,7 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
+    'jest',
     'react',
     '@typescript-eslint'
   ],
@@ -23,4 +25,4 @@ module.exports = {
     indent: 'off',
     semi: [2, 'always']
   }
-}
+};

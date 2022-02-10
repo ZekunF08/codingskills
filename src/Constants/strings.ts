@@ -4,4 +4,4 @@ export default {
     error_file_empty: 'Error, the file is empty. Please check and try again',
     error_no_result: 'Error, No result !',
     success_done_writing: 'Done writing.'
-}
+};

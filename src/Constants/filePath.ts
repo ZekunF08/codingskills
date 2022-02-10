@@ -4,5 +4,5 @@ export default {
     barcode_A_file: './input/barcodesA.csv',
     barcode_B_file: './input/barcodesB.csv',
     supplier_A_file: './input/suppliersA.csv',
-    supplier_B_file: './input/suppliersB.csv',
-}
+    supplier_B_file: './input/suppliersB.csv'
+};

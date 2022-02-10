@@ -1,16 +1,14 @@
 import * as fs from 'fs';
-import * as path from 'path';
 import * as csv from 'fast-csv';
 
-import { Catalog, CatalogWithSource } from "../../types/Catalog";
-import { Supplier } from "../../types/Supplier";
-import { SupplierProductBarcode } from "../../types/SupplierProductBarcode";
+import { Catalog, CatalogWithSource } from '../../types/Catalog';
+import { Supplier } from '../../types/Supplier';
+import { SupplierProductBarcode } from '../../types/SupplierProductBarcode';
 import strings from '../../Constants/strings';
 
 export const readCSV = (filePath: string) => {
-
     const dataSet: Catalog[] | Supplier[] | SupplierProductBarcode[] = [];
-    var result = new Promise<Catalog[] | Supplier[] | SupplierProductBarcode[]>((resolve, reject) => {
+    const result = new Promise<Catalog[] | Supplier[] | SupplierProductBarcode[]>((resolve, reject) => {
         if (!fs.existsSync(filePath)) {
             reject(strings.error_file_not_exist);
             return;
@@ -36,7 +34,6 @@ export const readCSV = (filePath: string) => {
                     resolve(dataSet);
                 }
                 reject(strings.error_file_empty);
-
             });
     });
     return result;
@@ -44,20 +41,19 @@ export const readCSV = (filePath: string) => {
 
 export const writeCSV = (outPutFile: string, data: CatalogWithSource[]) => {
     // let row = { SKU: 'ad', Description: 'ad', source: 'hahha' };
-    let outPutPath = `./output/${outPutFile}.csv`;
+    const outPutPath = `./output/${outPutFile}.csv`;
 
     // var outPutData = getTitle.concat(data);
     // let writeStream = fs.createWriteStream(outPutFile);
-    var result = new Promise((resolve, reject) => {
+    const result = new Promise((resolve, reject) => {
         if (data.length < 1) {
             reject(strings.error_no_result);
             return;
         }
-        let row = Object.keys(data[0]);
-        csv.writeToPath(outPutPath, [row, ...data],).
-            on('error', err => {
+        const row = Object.keys(data[0]);
+        csv.writeToPath(outPutPath, [row, ...data])
+            .on('error', err => {
                 reject(err);
-                return;
             })
             .on('finish', () => {
                 resolve(strings.success_done_writing);

@@ -24,12 +24,9 @@ export const readCSV = (filePath: string) => {
                 reject(error);
             })
             .on('data', (row) => {
-                // console.log(row);
                 dataSet.push(row);
             })
             .on('end', (rowCount: number) => {
-                // console.log(`Parsed ${rowCount} rows`);
-                // console.log(`dataSet`,dataSet);
                 if (rowCount > 1) {
                     resolve(dataSet);
                 }
@@ -40,11 +37,7 @@ export const readCSV = (filePath: string) => {
 };
 
 export const writeCSV = (outPutFile: string, data: CatalogWithSource[]) => {
-    // let row = { SKU: 'ad', Description: 'ad', source: 'hahha' };
     const outPutPath = `./output/${outPutFile}.csv`;
-
-    // var outPutData = getTitle.concat(data);
-    // let writeStream = fs.createWriteStream(outPutFile);
     const result = new Promise((resolve, reject) => {
         if (data.length < 1) {
             reject(strings.error_no_result);

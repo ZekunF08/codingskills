@@ -6,7 +6,6 @@ import { convertToProduct, dataConverter } from './dataConverter';
 describe('test data converter', () => {
     it('should return Company A payload if correct input are given', async () => {
         const companyAInfo = await dataConverter(filePath.cat_A_file, filePath.barcode_A_file, filePath.supplier_A_file, 'A');
-        // var companyBInfo = await dataConverter(filePath.cat_B_file, filePath.barcode_B_file, filePath.supplier_B_file, 'B');
         const expected = {
             company: 'A',
             catalog: [
@@ -84,7 +83,6 @@ describe('test data converter', () => {
         expect(companyAInfo).toEqual(expected);
     });
     it('should return Company B payload if correct input are given', async () => {
-        // var companyAInfo = await dataConverter(filePath.cat, filePath.barcode_A_file, filePath.supplier_A_file, 'A');
         const companyBInfo: CompanyPayload = await dataConverter(filePath.cat_B_file, filePath.barcode_B_file, filePath.supplier_B_file, 'B');
         const expected = {
             company: 'B',

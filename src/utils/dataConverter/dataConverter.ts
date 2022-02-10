@@ -25,11 +25,9 @@ export const dataConverter = async (catalogPath: string, barcodePath: string, su
 
 // reduce input into product
 export const convertToProduct = (payload: CompanyPayload): Product[] => {
-    // console.log(`payload`, payload);
     // TODO: handle type narrowDown earlier if have time
     const catalogList = payload.catalog as Catalog[];
     const productBarcodeList = payload.supplierProductBarcode as SupplierProductBarcode[];
-    // var supplierList = payload.supplierProductBarcode as SupplierProductBarcode[];
     const result: Product[] = catalogList.map(cat => {
         const barCodes: SupplierProductBarcode[] = productBarcodeList.filter(x => x.SKU === cat.SKU);
         const supplierList = [...new Set(barCodes.map(x => x.SupplierID))];
